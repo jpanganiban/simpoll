@@ -18,13 +18,17 @@ class Person(db.Document):
         }
 
 
-@app.route('/persons')
+@app.route('/persons', methods=['GET', 'POST'])
 def persons_route():
   if request.method.upper() == 'GET':
     persons = Person.query.all()
     return jsonify({
         'persons': [person.to_dict() for person in persons]
       })
+  elif request.method.upper() == 'POST':
+    person = Person(name=request.json.get('name'))
+    person.save()
+    return jsonify(person.to_dict())
 
 @app.route('/')
 def index():
