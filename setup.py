@@ -11,6 +11,7 @@ setup(name='Simpoll',
           'console_scripts': ['simpoll = simpoll:start']
         },
       install_requires=[
-          'flask'
+          'flask',
+          'flask-mongoalchemy',
         ]
       )
