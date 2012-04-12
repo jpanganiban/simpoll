@@ -13,5 +13,6 @@ setup(name='Simpoll',
       install_requires=[
           'flask',
           'flask-mongoalchemy',
+          'gevent'
         ]
       )
