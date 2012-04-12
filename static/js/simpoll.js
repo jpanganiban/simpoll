@@ -21,10 +21,18 @@ Simpoll.views.Person = Backbone.View.extend({
   tagName: 'li',
   className: 'person',
   template: 
-        '<span class=name><%- name %></span>',
+        '<span class=name><%- name %></span> <a href=# class=delete>x</a>',
+  events: {
+    'click .delete': 'deletePerson'
+  },
   render: function() {
     this.$el.html(_.template(this.template, this.model.toJSON()));
     return this;
+  },
+  deletePerson: function(e) {
+    e.preventDefault();
+    this.model.destroy();
+    this.remove();
   }
 });
 

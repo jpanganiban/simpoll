@@ -18,6 +18,13 @@ class Person(db.Document):
         }
 
 
+@app.route('/persons/<person_id>', methods=['DELETE'])
+def person_route(person_id):
+  if request.method.upper() == 'DELETE':
+    person = Person.query.get(person_id)
+    person.remove()
+    return ''
+
 @app.route('/persons', methods=['GET', 'POST'])
 def persons_route():
   if request.method.upper() == 'GET':
