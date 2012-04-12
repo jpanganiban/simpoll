@@ -18,6 +18,14 @@ class Person(db.Document):
         }
 
 
+@app.route('/persons')
+def persons_route():
+  if request.method.upper() == 'GET':
+    persons = Person.query.all()
+    return jsonify({
+        'persons': [person.to_dict() for person in persons]
+      })
+
 @app.route('/')
 def index():
   return render_template('index.html')
