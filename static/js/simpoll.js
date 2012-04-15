@@ -52,6 +52,8 @@ Simpoll.views.Persons = Backbone.View.extend({
     var collection = collection || this.collection;
     this.$el.empty();
     collection.each(this.add, this);
+    // Open connection
+    collection.parentModel.fetch();
     return this;
   }
 });
@@ -81,9 +83,8 @@ Simpoll.views.App = Backbone.View.extend({
     this.model.fetch();
   },
   renderModel: function(model) {
-    // Open up connection
+    // Change url
     this.model.url = '/poll';
-    this.model.fetch();
     var collection = model.get('persons');
     collection.parentModel = model;
     new Simpoll.views.Form({
