@@ -1,5 +1,20 @@
 Simpoll
 =======
 
-A simple long-polling demonstration based on
-gevent.event.Event.
+A simple long-polling demonstration with backbone.js and flask with gevent. 
+
+It mainly uses gevent.event.Event.
+
+To install, download the package and run (in a virtualenv):
+
+    python setup.py develop
+
+This will install all the necessary packages.
+
+After this (still under the virtualenv), type:
+
+    simpoll
+
+Open your favorite browser and go to
+
+    localhost:53000
