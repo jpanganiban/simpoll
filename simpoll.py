@@ -30,12 +30,17 @@ def person_route(person_id):
   if request.method.upper() == 'DELETE':
     person = Person.query.get(person_id)
     person.remove()
+    # An event happend so we are going to call the event.set
+    # so that all the waiters would wake up and be unblocked.
     event.set()
     event.clear()
     return ''
 
 @app.route('/poll')
 def poll():
+  # Wait blocks the main loop and waits for an event (event.set)
+  # to happen. If an event happens, this then get's unblocks,
+  # and continues with the process.
   event.wait()
   persons = Person.query.all()
   return jsonify({
@@ -52,6 +57,8 @@ def persons_route():
   elif request.method.upper() == 'POST':
     person = Person(name=request.json.get('name'))
     person.save()
+    # An event happend so we are going to call the event.set
+    # so that all the waiters would wake up and be unblocked.
     event.set()
     event.clear()
     return jsonify(person.to_dict())
