@@ -13,7 +13,6 @@ app.config['MONGOALCHEMY_DATABASE'] = 'simpoll'
 db = MongoAlchemy(app)
 
 event = Event()
-first_get = True
 
 class Person(db.Document):
   name = db.StringField()
