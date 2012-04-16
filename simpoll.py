@@ -38,7 +38,6 @@ def person_route(person_id):
 def poll():
   event.wait()
   persons = Person.query.all()
-  print persons
   return jsonify({
       'persons': [person.to_dict() for person in persons]
     })

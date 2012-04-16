@@ -52,7 +52,12 @@ Simpoll.views.Persons = Backbone.View.extend({
     var collection = collection || this.collection;
     this.$el.empty();
     collection.each(this.add, this);
-    // Open connection
+    // Open a connection again by fetching to the 
+    // server. This time, it fetches from
+    // /poll route where it is blocked by the 
+    // event.wait() where it waits for a new event
+    // to happen. Once a new event happens, it then unblocks it
+    // and the fetch succeeds.
     collection.parentModel.fetch();
     return this;
   }
@@ -83,7 +88,8 @@ Simpoll.views.App = Backbone.View.extend({
     this.model.fetch();
   },
   renderModel: function(model) {
-    // Change url
+    // Change url with the controller that
+    // has an event blocking
     this.model.url = '/poll';
     var collection = model.get('persons');
     collection.parentModel = model;
